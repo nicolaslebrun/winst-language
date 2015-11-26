@@ -1,0 +1,123 @@
+'scopeName': 'source.winst'
+'name': 'WINST'
+'fileTypes': ['ins', 'opsiscript']
+'patterns': [
+  # {
+  #   'begin': "^["
+  #   'beginCaptures':
+  #     0:
+  #       'name': "punctuation.start.definition.section.block.winst"
+  #
+  #   'end': "^["
+  #   'endCaptures':
+  #     0:
+  #       'name': "punctuation.start.definition.section.block.winst"
+  #
+  #   'name': "section.block.winst"
+  #   "patterns": [
+  #     {
+  #     'include': '#section'
+  #     }
+  #     {
+  #     'include': '#function'
+  #     }
+  #     {
+  #     'include': '#keyword'
+  #     }
+  #     {
+  #     'include': '#operator'
+  #     }
+  #     {
+  #     'include': '#variable'
+  #     }
+  #     {
+  #     'include': '#variable-root'
+  #     }
+  #     {
+  #     'include': '#deprecated'
+  #     }
+  #   ]
+  # }
+  {
+  'begin': ';(|.+)'
+  'end': '\n'
+  'name': 'winst.comment'
+  }
+
+#Inside a double quoted string, we want to seek for variable
+  {
+  'begin': '"'
+  'end': '"'
+  'name': 'winst.string.quoted.double'
+  'patterns': [
+      {
+        'include': '#variable'
+      }
+      {
+        'include': '#variable-root'
+      }
+      ]
+  }
+
+# Color a section when it is called
+  {
+  'begin': '^\\['
+  'end': '\\]'
+  'name': 'winst.entity.name.section'
+  'patterns': [
+      {
+      'include': '#section'
+      }
+      {
+      'include': '#deprecated'
+      }
+      ]
+   }
+
+# Include all match defined in repository
+  {
+  'include': '#section'
+  }
+  {
+  'include': '#function'
+  }
+  {
+  'include': '#keyword'
+  }
+  {
+  'include': '#operator'
+  }
+  {
+  'include': '#variable'
+  }
+  {
+  'include': '#variable-root'
+  }
+  {
+  'include': '#deprecated'
+  }
+
+]
+
+'repository':
+  'keyword':
+    'match': '\\b(?i:(endif|if|else|for|do|in|defvar|defstringlist|set|desktop|sendto|startmenu|startup|programs|desktopdirectory|common_startmenu|common_programs|common_startup|common_desktopdirectory|False|True|on|off|SetLogLevel|ExitOnError|ScriptErrorMessages|TraceMode|StayOnTop|requiredWinstVersion|SetUsercontext|saveVersionToProfile|includelog|include_insert|include_append|FatalOnSyntaxError|FatalOnRuntimeError|SetSkinDirectory|SetConfidential|noUpdateScript))\\b'
+    'name' : 'winst.keyword.control'
+  'section':
+    'match':  '\\b(?i:(sub|registry|patchtextfile|patches|patchhosts|winbatch|dosinanicon|dosbatch|shellinanicon|shellbatch|files|LinkFolder|OpsiServiceCall|Execwith|ExecPython|LdapSearch|xmlpatch)(|[a-zA-Z0-9_-]+))\\b'
+    'name': 'winst.entity.name.section'
+  'function':
+    'match':  '\\b(?i:(Message|Comment|fileexists|fileexists64|fileexists32|fileexistsSysNative|hasminimumspace|opsiLicenseManagementEnabled|XMLAddNamespace|XMLRemoveNamespace|runningAsAdmin|isLoginScript|scriptWasExecutedBefore|contains|isNumber|runningOnUefi|getLastExitCode|gethostsaddr|gethostsname|GetUserSID|getmultiszfromfile|getntversion|getos|GetMSVersionInfo|GetProductProperty|getregistrystringvalue|getregistrystringvalue64|getregistrystringvalue32|getregistrystringvalueSysNative|GetSystemtype|getValue|getvaluefrominifile|envvar|errorsoccuredsincemark|extractfilepath|regstring|Trim|HexStrToDecStr|DecStrToHexStr|getLogLevel|lower|LangCodeByHex|CompareDotSeparatedStrings|CompareDotSeparatedNumbers|base64EncodeStr|base64DecodeStr|Convert2JsonStr|GetLoggedInUser|GetUsercontext|GetScriptMode|getValueBySeparator|unquote|readVersionFromProfile|stringReplace|GetMyIpByTarget|getIpByName|getDiffTimeSec|SidToName|strLength|strPos|strPart|calculate|reencodestr|calculate|getLinuxDistroType|calculate|getLastServiceErrorMessage|getLastServiceErrorClass|demandLicenseKey|freeLicense|createstringlist|composestring|getLocaleInfoMap|getFileInfoMap|getMSVersionMap|getoutstreamfromsection|getreturnlistfromsection|getsublist|loadtextfile|loadunicodetextfile|retrievesection|reverse|splitstring|splitstringonwhitespace|takestring|takeFirstStringContaining|getlistContaining|count|addtolist|addlisttolist|getSectionNames|getProcessList|getProductPropertyList|getRegistryKeyList32|getRegistryKeyList64|getRegistryKeyListSysnative|getRegistryVarList32|getRegistryVarList64|getRegistryVarListSysnative|getProductMap|getProfilesDirList|GetRegistryVarMap32|GetRegistryVarMap64|GetRegistryVarMapSysNative|reencodestrlist|shellCall|emptylist|getlistcontainingList|getHWBiosInfoMap|getLinuxVersionMap|checktargetpath|copy|delete|del|sourcepath|delete_element|delete_subfolder|deletelement|end_link|icon_file|icon_index|name|set_basefolder|set_link|set_subfolder|working_dir|alias|driver|add|addnew|change|del|delsec|replace|delhost|delalias|setaddr|setalias|addline|append_file|appendline|Set_Mozilla_Pref|AddStringListElement_To_Mozilla_Pref|advanceline|deletealllines_startingwith|deletetheline|findline|findline_containing|findline_startingwith|gotobottom|gototop|insertline|linebeginning_existsin|lineexistsin|savetofile|sorted|subtract_file|deletekey|flushkey|openkey|reconstructfrom|regedit|registry|supp|SaveValueToFile|all_childelements_with|documentroot|create_when_node_not_existing|error_when_no_node_existing|error_when_nodecount_greater_1|attributenames|attributes|counting|elementnames|elements|text|return|warning_when_no_node_existing|warning_when_nodecount_greater_1|opennodeset|exitwindows|/immediatelogout|/immediatereboot|isfatalerror|isSuspended|isSuccess|pause|/reboot|showbitmap|showmessagefile|sleepSeconds|ChangeDirectory|NormalizeWinst|IconizeWinst|RestoreWinst|BlockInput|addattribute|addreg|addtext|attribute|attributes_strict|deleteattribute|deletevar|elementname|end|killtask|logerror|logwarning|markerrornumber|markTime|diffTime|parameters|randomstr|setattribute|setcomment|setname|settext|stop|target|text))\\b'
+    'name': 'winst.support.function'
+  'operator':
+    'match': '(!|\\+|-|\\.|=|>|<|>=|<=|not|and|or)'
+    'name': 'winst.keyword.operator'
+  'variable-root':
+    'match': '(\\%\\b[a-zA-Z0-9_]+\\b\\%)'
+    'name': 'winst.variable.interpolation'
+  'variable':
+    'match':  '(\\$\\b[a-zA-Z0-9_]+\\b\\$)'
+    'name': 'winst.variable'
+  'deprecated':
+    'match':  '\\b(?i:(inivar|stringsplit|substringbefore|LogLevel|GetIni|getLocaleInfo|Aktionen|addstringlistelement_to_netscape_user_pref|set_netscape_user_pref|zip|progmangroups|idapiconfig|zip))\\b'
+    'name': 'winst.invalid.illegal'

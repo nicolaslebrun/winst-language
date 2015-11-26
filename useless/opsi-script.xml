@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE MODE SYSTEM "xmode.dtd">
+
+<!-- Winst mode 2013-02-15 -->
+<MODE>
+	<PROPS>
+		<PROPERTY NAME="indentNextLines" VALUE="^\s*(if|else)\s*" />
+		<PROPERTY NAME="unindentNextLines" VALUE="^\s*(else|endif)\s*" />
+		<PROPERTY NAME="unindentThisLine" VALUE="^\s*(else|endif)\s*" />
+		<PROPERTY NAME="lineComment" VALUE=";" />
+		<PROPERTY NAME="ignoreWhitespace" VALUE="false" />
+		<!--
+		<PROPERTY NAME="unalignedOpenBrackets" VALUE="(" />
+		<PROPERTY NAME="unalignedCloseBrackets" VALUE=")" />
+		<PROPERTY NAME="electricKeys" VALUE=":" />
+		<PROPERTY NAME="blockComment" VALUE=";" />
+		-->
+	</PROPS>
+	<RULES IGNORE_CASE="TRUE" HIGHLIGHT_DIGITS="TRUE">
+		<!-- Comment -->
+		<EOL_SPAN TYPE="COMMENT1">;</EOL_SPAN>
+		<EOL_SPAN AT_WHITESPACE_END="TRUE" TYPE="COMMENT3">comment</EOL_SPAN>
+		<EOL_SPAN AT_WHITESPACE_END="TRUE" TYPE="COMMENT3">message</EOL_SPAN>
+
+		<!-- variables -->
+		<SEQ_REGEXP HASH_CHAR="$" TYPE="KEYWORD2">\$#?((\p{Alpha}\w*|_\w+)?::)*(\p{Alpha}\w*|_\w+|\d+)\$*</SEQ_REGEXP>
+		<SEQ_REGEXP HASH_CHAR="%" TYPE="KEYWORD2">%((\p{Alpha}\w*|_\w+)?::)*(\p{Alpha}\w*|_\w+|\d+)%*</SEQ_REGEXP>
+
+		<SEQ TYPE="OPERATOR">!</SEQ>
+		<SEQ TYPE="OPERATOR">+</SEQ>
+		<SEQ TYPE="OPERATOR">-</SEQ>
+		<SEQ TYPE="OPERATOR">.</SEQ>
+		<SEQ TYPE="OPERATOR">=</SEQ>
+		<SEQ TYPE="OPERATOR">&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">&lt;</SEQ>
+		<SEQ TYPE="OPERATOR">&gt;=</SEQ>
+		<SEQ TYPE="OPERATOR">&lt;=</SEQ>
+
+		<!--
+		<SEQ TYPE="OPERATOR">/</SEQ>
+		<SEQ TYPE="OPERATOR">*</SEQ>
+
+		<SEQ TYPE="OPERATOR">&amp;</SEQ>
+		-->
+		<!--
+		<MARK_PREVIOUS TYPE="FUNCTION"
+			       MATCH_TYPE="OPERATOR">(</MARK_PREVIOUS>
+		<SEQ TYPE="OPERATOR">)</SEQ>
+		-->
+		<SEQ TYPE="OPERATOR">(</SEQ>
+		<SEQ TYPE="OPERATOR">)</SEQ>
+
+		<!--
+		<SPAN TYPE="OPERATOR" AT_LINE_START="TRUE">
+			<BEGIN>[</BEGIN>
+			<END>]</END>
+		</SPAN>
+		-->
+
+		<KEYWORDS>
+			<!-- Reserved words. Standard directives are not included, except -->
+			<!-- private, protected, public, published, and automated. -->
+			<KEYWORD1>endif|if|else|for|do|not|and|or|in|defvar|defstringlist|set</KEYWORD1>
+			<KEYWORD2>desktop|sendto|startmenu|startup|programs|desktopdirectory|common_startmenu|common_programs|common_startup|common_desktopdirectory</KEYWORD2>
+			<KEYWORD3>False|True|on|off</KEYWORD3>
+			<KEYWORD4>SetLogLevel|ExitOnError|ScriptErrorMessages|TraceMode|StayOnTop|requiredWinstVersion|SetUsercontext|saveVersionToProfile|includelog|include_insert|include_append|FatalOnSyntaxError|FatalOnRuntimeError|SetSkinDirectory|SetConfidential|noUpdateScript</KEYWORD4>
+
+			<!-- functions -->
+			<INVALID>inivar|stringsplit|substringbefore|LogLevel|GetIni|getLocaleInfo|Aktionen|addstringlistelement_to_netscape_user_pref|set_netscape_user_pref|zip|progmangroups|idapiconfig|zip</INVALID>
+			<FUNCTION>fileexists|fileexists64|fileexists32|fileexistsSysNative|hasminimumspace|opsiLicenseManagementEnabled|XMLAddNamespace|XMLRemoveNamespace|runningAsAdmin|isLoginScript|scriptWasExecutedBefore|contains|isNumber|runningOnUefi|getLastExitCode|gethostsaddr|gethostsname|GetUserSID|getmultiszfromfile|getntversion|getos|GetMSVersionInfo|GetProductProperty|getregistrystringvalue|getregistrystringvalue64|getregistrystringvalue32|getregistrystringvalueSysNative|GetSystemtype|getValue|getvaluefrominifile|envvar|errorsoccuredsincemark|extractfilepath|regstring|Trim|HexStrToDecStr|DecStrToHexStr|getLogLevel|lower|LangCodeByHex|CompareDotSeparatedStrings|CompareDotSeparatedNumbers|base64EncodeStr|base64DecodeStr|Convert2JsonStr|GetLoggedInUser|GetUsercontext|GetScriptMode|getValueBySeparator|unquote|readVersionFromProfile|stringReplace|GetMyIpByTarget|getIpByName|getDiffTimeSec|SidToName|strLength|strPos|strPart|calculate|reencodestr|calculate|getLinuxDistroType|calculate|getLastServiceErrorMessage|getLastServiceErrorClass|demandLicenseKey|freeLicense|createstringlist|composestring|getLocaleInfoMap|getFileInfoMap|getMSVersionMap|getoutstreamfromsection|getreturnlistfromsection|getsublist|loadtextfile|loadunicodetextfile|retrievesection|reverse|splitstring|splitstringonwhitespace|takestring|takeFirstStringContaining|getlistContaining|count|addtolist|addlisttolist|getSectionNames|getProcessList|getProductPropertyList|getRegistryKeyList32|getRegistryKeyList64|getRegistryKeyListSysnative|getRegistryVarList32|getRegistryVarList64|getRegistryVarListSysnative|getProductMap|getProfilesDirList|GetRegistryVarMap32|GetRegistryVarMap64|GetRegistryVarMapSysNative|reencodestrlist|shellCall|emptylist|getlistcontainingList|getHWBiosInfoMap|getLinuxVersionMap|checktargetpath|copy|delete|del|sourcepath|delete_element|delete_subfolder|deletelement|end_link|icon_file|icon_index|name|set_basefolder|set_link|set_subfolder|working_dir|alias|driver|add|addnew|change|del|delsec|replace|delhost|delalias|setaddr|setalias|addline|append_file|appendline|Set_Mozilla_Pref|AddStringListElement_To_Mozilla_Pref|advanceline|deletealllines_startingwith|deletetheline|findline|findline_containing|findline_startingwith|gotobottom|gototop|insertline|linebeginning_existsin|lineexistsin|savetofile|sorted|subtract_file|deletekey|flushkey|openkey|reconstructfrom|regedit|registry|supp|SaveValueToFile|all_childelements_with|documentroot|create_when_node_not_existing|error_when_no_node_existing|error_when_nodecount_greater_1|attributenames|attributes|counting|elementnames|elements|text|return|warning_when_no_node_existing|warning_when_nodecount_greater_1|opennodeset|exitwindows|/immediatelogout|/immediatereboot|isfatalerror|isSuspended|isSuccess|pause|/reboot|showbitmap|showmessagefile|sleepSeconds|ChangeDirectory|NormalizeWinst|IconizeWinst|RestoreWinst|BlockInput|addattribute|addreg|addtext|attribute|attributes_strict|deleteattribute|deletevar|elementname|end|killtask|logerror|logwarning|markerrornumber|markTime|diffTime|parameters|randomstr|setattribute|setcomment|setname|settext|stop|target|text</FUNCTION>
+		</KEYWORDS>
+
+		<SEQ_REGEXP TYPE="OPERATOR">[\s\[^]sub\s+</SEQ_REGEXP>
+		<SEQ_REGEXP AT_LINE_START="TRUE" TYPE="OPERATOR">\[initial\]</SEQ_REGEXP>
+		<SEQ_REGEXP AT_LINE_START="TRUE" TYPE="OPERATOR">\[actions\]</SEQ_REGEXP>
+		<SEQ_REGEXP AT_LINE_START="TRUE" TYPE="OPERATOR">\[profileactions\]</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">\s+/(EscapeStrings)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">registry\S+\s+/(allntuserdats|64Bit|32Bit|SysNative|regedit|usercontext)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">winbatch\S+\s+/(letthemgo|TimeOutSeconds|waitforprocessending|waitforwindowappearing|waitforwindowvanish|waitonclose|waitsecconds|runelevated|RunAsLoggedOnUser)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">files\S+\s+/(64Bit|32Bit|SysNative|allntuserprofiles|allntusersendto)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">patches\S+\s+/(allntuserprofiles)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">ldapsearch\S+\s+/(cache|cached|values|objects|attributes|free)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">shellinanicon\S+\s+/(64Bit|32Bit|SysNative)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">shellbatch\S+\s+/(64Bit|32Bit|SysNative)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">dosinanicon\S+\s+/(64Bit|32Bit|SysNative)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">dosbatch\S+\s+/(64Bit|32Bit|SysNative)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">opsiservicecall\S+\s+/(opsiclientd|serviceurl|SysNative|username|password|interactive)</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">\s+winst</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">profileactions</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">sub\s+</SEQ_REGEXP>
+
+
+		<SEQ_REGEXP AT_LINE_START="TRUE" TYPE="OPERATOR">\[(sub|registry|patchtextfile|patches|patchhosts|winbatch|dosinanicon|dosbatch|shellinanicon|shellbatch|files|LinkFolder|OpsiServiceCall|Execwith|ExecPython|LdapSearch|xmlpatch)\S+\]</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">(sub|registry|patchtextfile|patches|patchhosts|winbatch|dosinanicon|dosbatch|shellinanicon|shellbatch|files|LinkFolder|OpsiServiceCall|Execwith|ExecPython|LdapSearch|xmlpatch)\S+</SEQ_REGEXP>
+
+	</RULES>
+
+	<!-- rulesets to syntax highlight string interpolation sequences -->
+	<RULES SET="LITERAL_ONE" DEFAULT="LITERAL1"> <!-- ESCAPE="\"> -->
+		<!--
+		<SEQ_REGEXP HASH_CHAR="%" TYPE="LITERAL4">%[.]?\d*[diouxXeEfFgGcrs]</SEQ_REGEXP>
+		<SEQ_REGEXP HASH_CHAR="%(" TYPE="LITERAL4">%\([^)]+\)[+ -]?\d*[diouxXeEfFgGcrs]</SEQ_REGEXP>
+		-->
+		<SEQ_REGEXP HASH_CHAR="$" TYPE="KEYWORD2">\$#?((\p{Alpha}\w*|_\w+)?::)*(\p{Alpha}\w*|_\w+|\d+)\$*</SEQ_REGEXP>
+		<SEQ_REGEXP HASH_CHAR="%" TYPE="KEYWORD2">%((\p{Alpha}\w*|_\w+)?::)*(\p{Alpha}\w*|_\w+|\d+)%*</SEQ_REGEXP>
+	</RULES>
+
+</MODE>

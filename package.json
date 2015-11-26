@@ -1,0 +1,16 @@
+{
+  "name": "winst-syntax",
+  "version": "0.0.1",
+  "description": "Winst is the language used by UIB's OPSI-client-agent to script silent install",
+  "keywords": [
+    "syntax",
+    "opsi",
+    "winst"
+  ],
+  "repository": "https://github.com/nicolaslebrun//winst-synguage",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0",
+    "node": "*"
+  }
+}
