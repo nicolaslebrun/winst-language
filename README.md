@@ -7,7 +7,7 @@
 Clone this project,  ~/Developpement for example.
 
 ``` bash
-git clone git clone https://github.com/nicolaslebrun/winst-language.git
+git clone https://github.com/nicolaslebrun/winst-language.git
 ```
 
 Make a symbolic link to have it working in atom
